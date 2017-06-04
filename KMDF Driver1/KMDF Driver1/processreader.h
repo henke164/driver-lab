@@ -1,5 +1,10 @@
 #pragma once
 #include <ntddk.h>
-#include "intoa.h"
 
-PCHAR GetProcessMemoryStringValue();
+int InitializeProcess(int id);
+
+int ProcessRunning();
+
+int GetProcessBaseAddress();
+
+UNICODE_STRING GetProcessMemoryStringValue(int address);

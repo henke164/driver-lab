@@ -1,5 +1,8 @@
 #include "processreader.h"
 #include <stdio.h>
+#include <Basetsd.h>
+
+PEPROCESS Process;
 
 NTSTATUS NTAPI MmCopyVirtualMemory
 (
@@ -17,6 +20,14 @@ NTKERNELAPI NTSTATUS PsLookupProcessByProcessId(
 	_In_ PUNICODE_STRING RegistryPath
 );
 
+NTKERNELAPI PVOID PsGetProcessSectionBaseAddress(__in PEPROCESS Process);
+
+int InitializeProcess(int id)
+{
+	PsLookupProcessByProcessId(id, &Process);
+	return Process ? 1 : 0;
+}
+
 NTSTATUS KeReadProcessMemory(PEPROCESS Process, PVOID SourceAddress, PVOID TargetAddress, SIZE_T Size)
 {
 	PEPROCESS TargetProcess = PsGetCurrentProcess();
@@ -29,20 +40,37 @@ NTSTATUS KeReadProcessMemory(PEPROCESS Process, PVOID SourceAddress, PVOID Targe
 	return STATUS_ACCESS_DENIED;
 }
 
-PCHAR GetProcessMemoryStringValue()
+UNICODE_STRING GetProcessMemoryStringValue(int address)
 {
-	char arr[10] = "Hej";
-	PCHAR c = (PCHAR)arr[10];
-	return c;
-
-	PEPROCESS Process;
-	int readval;
-
-	PsLookupProcessByProcessId(6448, &Process);
+	UNICODE_STRING str;
 
 	if (Process)
 	{
-		KeReadProcessMemory(Process, 0x00F2342C, &readval, sizeof(__int32));
+		int readval;
+		KeReadProcessMemory(Process, address, &readval, sizeof(__int32));
+		RtlIntegerToUnicodeString(readval, 10, &str);
 	}
-	return "HEJ";
+	else
+	{
+		RtlInitUnicodeString(&str, L"Process not found");
+	}
+
+	return str;
+}
+
+int ProcessRunning()
+{
+	return Process ? 1 : 0;
+}
+
+int GetProcessBaseAddress()
+{
+	if (Process)
+	{
+		PVOID baseAddress = PsGetProcessSectionBaseAddress(Process);
+		int addr = PtrToInt((INT_PTR)baseAddress);
+		
+		return addr;
+	}
+	return 0;
 }

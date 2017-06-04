@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 			SERVICE_KERNEL_DRIVER,
 			SERVICE_DEMAND_START,
 			SERVICE_ERROR_IGNORE,
-			L"C:\\DriverTest\\Drivers\\KMDFDriver1.sys",
+			L"C:\\Users\\henri\\Documents\\visual studio 2015\\Projects\\KMDF Driver1\\x64\\Release\\KMDFDriver1.sys",
 			NULL, NULL, NULL, NULL, NULL);
 
 		if (!hService)

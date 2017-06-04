@@ -164,13 +164,15 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="communication.c" />
     <ClCompile Include="Driver.c" />
-    <ClCompile Include="intoa.c" />
+    <ClCompile Include="helpers.c" />
     <ClCompile Include="ioctl.c" />
     <ClCompile Include="processreader.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="intoa.h" />
+    <ClInclude Include="communication.h" />
+    <ClInclude Include="helpers.h" />
     <ClInclude Include="ioctl.h" />
     <ClInclude Include="processreader.h" />
   </ItemGroup>

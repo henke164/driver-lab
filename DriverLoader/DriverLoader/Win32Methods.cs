@@ -39,9 +39,9 @@
             int hDevice, int dwIoControlCode, byte[] InBuffer, int nInBufferSize,
             byte[] OutBuffer, int nOutBufferSize, ref int pBytesReturned, int pOverlapped);
 
-        public static int CTL_CODE(int DeviceType, int Function, int Method, int Access)
+        public static int CTL_CODE(int DeviceType, IOCTLCodes code, int Method, int Access)
         {
-            return (((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method));
+            return (((DeviceType) << 16) | ((Access) << 14) | (((int)code) << 2) | (Method));
         }
 
         public int DEVICE_TYPE_FROM_CTL_CODE(int ctrlCode)

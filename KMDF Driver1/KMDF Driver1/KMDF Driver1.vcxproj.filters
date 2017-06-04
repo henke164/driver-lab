@@ -33,7 +33,10 @@
     <ClCompile Include="processreader.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="intoa.c">
+    <ClCompile Include="helpers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="communication.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +47,10 @@
     <ClInclude Include="processreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="intoa.h">
+    <ClInclude Include="helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="communication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

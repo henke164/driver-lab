@@ -28,7 +28,7 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT DriverObject, _In_ PUNICODE_STRING Regi
 
 	int uiIndex = 0;
 	for (uiIndex = 0; uiIndex < IRP_MJ_MAXIMUM_FUNCTION; uiIndex++)
-		DriverObject->MajorFunction[uiIndex] = UNSUPPORTED;
+		DriverObject->MajorFunction[uiIndex] = Unsupported;
 
 	DriverObject->MajorFunction[IRP_MJ_DEVICE_CONTROL] = IOCTL;
 	DriverObject->DriverUnload = UnloadDriver;
